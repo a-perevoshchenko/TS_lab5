@@ -12,9 +12,27 @@ public class FileServiceTests
 
         Assert.Equal("StubbedFileContent", result);
     }
+
+    [Fact]
+    public void TestFileReadFunctionWithInvalidPath()
+    {
+        IFileService fileService = new FileServiceStub();
+        
+        var exception = Assert.Throws<FileNotFoundException>(() => fileService.ReadFile("invalid/path/to/file"));
+
+        Assert.Equal("File not found", exception.Message);
+    }
 }
 
 public class FileServiceStub : IFileService
 {
-    public string ReadFile(string path) => "StubbedFileContent";
+    public string ReadFile(string path)
+    {
+        if (path == "invalid/path/to/file")
+        {
+            throw new FileNotFoundException("File not found");
+        }
+
+        return "StubbedFileContent";
+    }
 }

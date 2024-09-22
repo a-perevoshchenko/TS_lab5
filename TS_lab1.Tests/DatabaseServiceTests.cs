@@ -15,4 +15,17 @@ public class DatabaseServiceTests
 
         Assert.Equal("MockData", result);
     }
+
+    [Fact]
+    public void TestDatabaseReadFunctionWithInvalidId()
+    {
+        var mockDatabaseService = new Mock<IDatabaseService>();
+        mockDatabaseService.Setup(service => service.ReadData(It.IsAny<int>()))
+            .Throws(new ArgumentException("Invalid ID"));
+
+        var exception = Assert.Throws<ArgumentException>(() => mockDatabaseService.Object.ReadData(-1));
+
+        Assert.Equal("Invalid ID", exception.Message);
+    }
 }
+
