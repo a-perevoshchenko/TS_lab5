@@ -1,0 +1,17 @@
+{
+  "stryker-config": {
+    "thresholds": {
+      "high": 80,
+      "low": 60,
+      "break": 40
+    },
+    "reporters": [
+      "progress",
+      "html"
+    ],
+    "mutate": [
+      "TS_lab1/TS_lab1.Core/*.cs"
+    ],
+    "coverage-analysis": "all"
+  }
+}

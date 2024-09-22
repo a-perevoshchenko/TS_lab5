@@ -1,0 +1,3 @@
+﻿
+//dotnet stryker
+Console.WriteLine();
